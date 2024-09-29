@@ -1,8 +1,10 @@
 # Sistem Registrasi Modern
+Duta Ardhika Wahyu Nugraha
+Universitas Jember
 
 ## Deskripsi
 
-Sistem Registrasi Modern adalah aplikasi web interaktif yang memungkinkan pengguna untuk melakukan registrasi dan mengelola daftar pendaftar. Aplikasi ini dirancang dengan menggunakan **HTML**, **CSS** (dengan **Bootstrap**), dan **JavaScript**. Dengan pendekatan **Object-Oriented Programming (OOP)**, aplikasi ini memastikan pengelolaan data yang lebih baik dan terstruktur. 
+Sistem Registrasi Modern adalah aplikasi web interaktif yang memungkinkan pengguna untuk melakukan registrasi dan mengelola daftar pendaftar. Aplikasi ini dirancang menggunakan **HTML**, **CSS** (dengan **Bootstrap**), dan **JavaScript**. Dengan pendekatan **Object-Oriented Programming (OOP)**, aplikasi ini memastikan pengelolaan data yang lebih baik dan terstruktur. 
 
 ## Fitur Utama
 
@@ -37,25 +39,101 @@ Sistem Registrasi Modern adalah aplikasi web interaktif yang memungkinkan penggu
 ## Contoh Penerapan
 
 ### 1. OOP (Object-Oriented Programming)
-- **Kelas `Registrant`**:
+- **Kelas `Registrant`**: 
   - Menyimpan informasi mengenai pendaftar (nama, umur, uang saku).
+  - Contoh Implementasi:
+    ```javascript
+    class Registrant {
+        constructor(name, age, money) {
+            this.name = name;
+            this.age = age;
+            this.money = money;
+        }
+    }
+    ```
+  
 - **Kelas `RegistrationSystem`**:
   - Menangani logika pendaftaran, validasi data, dan penghitungan statistik.
+  - Contoh Implementasi:
+    ```javascript
+    class RegistrationSystem {
+        constructor() {
+            this.registrants = [];
+        }
+
+        addRegistrant(registrant) {
+            return new Promise((resolve, reject) => {
+                if (this.validateRegistrant(registrant)) {
+                    this.registrants.push(registrant);
+                    resolve(registrant);
+                } else {
+                    reject(new Error("Data tidak valid"));
+                }
+            });
+        }
+
+        validateRegistrant(registrant) {
+            return registrant.name.length >= 10 &&
+                   registrant.age >= 25 &&
+                   registrant.money >= 100000 &&
+                   registrant.money <= 1000000;
+        }
+    }
+    ```
 
 ### 2. DOM (Document Object Model)
 - Menggunakan JavaScript untuk memanipulasi elemen HTML. Misalnya, menambahkan data pendaftar ke tabel dan memperbarui ringkasan statistik secara dinamis.
+- Contoh Implementasi:
+    ```javascript
+    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const age = parseInt(document.getElementById('age').value);
+        const money = parseInt(document.getElementById('money').value);
+        
+        const registrant = new Registrant(name, age, money);
+        await system.addRegistrant(registrant);
+        updateTable();
+    });
+    ```
 
 ### 3. Asynchronous
 - Menggunakan `Promise` untuk menangani operasi penambahan pendaftar secara asynchronous, memastikan UI tetap responsif.
+- Contoh Implementasi:
+    ```javascript
+    await system.addRegistrant(registrant);
+    ```
 
 ### 4. Perulangan
 - Menggunakan `forEach` untuk iterasi melalui array `registrants` dan menampilkan setiap pendaftar dalam tabel.
+- Contoh Implementasi:
+    ```javascript
+    system.getRegistrants().forEach(registrant => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = registrant.name;
+        row.insertCell(1).textContent = registrant.age;
+        row.insertCell(2).textContent = `Rp ${registrant.money.toLocaleString('id-ID')}`;
+    });
+    ```
 
 ### 5. Percabangan
 - Menggunakan pernyataan `if` dalam metode `validateRegistrant` untuk memeriksa apakah data yang dimasukkan memenuhi syarat.
+- Contoh Implementasi:
+    ```javascript
+    if (this.validateRegistrant(registrant)) {
+        this.registrants.push(registrant);
+        resolve(registrant);
+    } else {
+        reject(new Error("Data tidak valid"));
+    }
+    ```
 
 ### 6. Array
 - Menyimpan daftar pendaftar dalam array `registrants`, yang memudahkan pengelolaan dan pengambilan data.
+- Contoh Implementasi:
+    ```javascript
+    this.registrants = []; // Inisialisasi array untuk menyimpan pendaftar
+    ```
 
 ## Cara Mencoba Aplikasi
 
