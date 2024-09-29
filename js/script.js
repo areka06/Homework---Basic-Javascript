@@ -1,4 +1,3 @@
-// Implementasi OOP
 class Registrant {
     constructor(name, age, money) {
         this.name = name;
@@ -21,7 +20,7 @@ class RegistrationSystem {
                 } else {
                     reject(new Error("Data tidak valid"));
                 }
-            }, 1000); // Simulasi operasi asynchronous
+            }, 1000);
         });
     }
 
@@ -41,27 +40,17 @@ class RegistrationSystem {
         const totalMoney = this.registrants.reduce((sum, reg) => sum + reg.money, 0);
         const avgAge = totalAge / this.registrants.length || 0;
         const avgMoney = totalMoney / this.registrants.length || 0;
-
-        const formattedAvgMoney = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(avgMoney); // Format uang sangu
-
-        return `Rata-rata pendaftar memiliki uang sangu sebesar ${formattedAvgMoney} dengan rata-rata umur ${avgAge.toFixed(1)} tahun`;
+        return `Rata-rata pendaftar memiliki uang sangu sebesar Rp ${avgMoney.toLocaleString('id-ID', { minimumFractionDigits: 2 })} dengan rata-rata umur ${avgAge.toFixed(1)} tahun`;
     }
 }
 
-// Inisialisasi sistem registrasi
 const system = new RegistrationSystem();
 
-// DOM manipulation
 document.getElementById('registrationForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const age = parseInt(document.getElementById('age').value);
-    const money = parseInt(document.getElementById('money').value.replace(/\./g, '').replace(/,/g, '')); // Format input uang
+    const money = parseInt(document.getElementById('money').value);
 
     const registrant = new Registrant(name, age, money);
 
@@ -90,5 +79,4 @@ function updateTable() {
     summary.innerHTML = `<i class="fas fa-chart-bar me-2"></i>${system.getSummary()}`;
 }
 
-// Inisialisasi tab
 document.getElementById('list-tab').addEventListener('shown.bs.tab', updateTable);
