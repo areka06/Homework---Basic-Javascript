@@ -1,6 +1,5 @@
 # Sistem Registrasi Modern
-Duta Ardhika Wahyu Nugraha
-Universitas Jember
+Duta Ardhika Wahyu Nugraha - Universitas Jember
 
 ## Deskripsi
 
